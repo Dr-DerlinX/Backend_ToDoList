@@ -8,6 +8,7 @@ public class ToDoListApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ToDoListApplication.class, args);
+		System.out.println("Recuerda que al temnar el proyecto debes dockelzar la aplicacion....!");
 	}
 
 }

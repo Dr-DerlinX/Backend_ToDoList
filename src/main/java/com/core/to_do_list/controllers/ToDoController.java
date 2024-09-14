@@ -1,5 +1,6 @@
 package com.core.to_do_list.controllers;
 
+import com.core.to_do_list.exceptions.RecouserNotFoundException;
 import com.core.to_do_list.persistence.Entities.Tarea;
 import com.core.to_do_list.persistence.Entities.Usuario;
 import com.core.to_do_list.services.TareasInfoSevices;
@@ -22,7 +23,7 @@ public class ToDoController {
     private UserInfoServices usuarioServices;
 
     @GetMapping("/tareas/{tarea_id}/usuario/{user_id}")
-    public ResponseEntity<?> obtenerTareaPorId(@PathVariable Long tarea_id, @PathVariable Long user_id){
+    public ResponseEntity<?> obtenerTareaPorId(@PathVariable Long tarea_id, @PathVariable Long user_id) throws RecouserNotFoundException {
         Tarea tarea =tareasServices.obtenerTarea(tarea_id, user_id);
         return ResponseEntity.ok(tarea);
     }
@@ -41,7 +42,7 @@ public class ToDoController {
     }
 
     @PostMapping("/tareas/{usuario_id}")
-    public ResponseEntity<Tarea> postTareas(@PathVariable Long usuario_id, @RequestBody Tarea tareas){
+    public ResponseEntity<Tarea> postTareas(@PathVariable Long usuario_id, @RequestBody Tarea tareas) throws RecouserNotFoundException {
 
         try{
             Tarea tareasEntity = tareasServices.agregarTarea(usuario_id, tareas);
@@ -54,13 +55,13 @@ public class ToDoController {
     }
 
     @PutMapping("/tareas/{tarea_id}/usuario/{user_id}")
-    public ResponseEntity<?> editarTarea(@PathVariable Long tarea_id, @PathVariable Long user_id,@RequestBody Tarea tarea){
+    public ResponseEntity<?> editarTarea(@PathVariable Long tarea_id, @PathVariable Long user_id,@RequestBody Tarea tarea) throws RecouserNotFoundException {
         tareasServices.modificarTarea(user_id, tarea_id, tarea);
         return ResponseEntity.ok("Tarea edictada con exito..!");
     }
 
     @DeleteMapping("/tareas/{id}")
-    public ResponseEntity<?> eliminarTarea(@PathVariable Long id){
+    public ResponseEntity<?> eliminarTarea(@PathVariable Long id) throws RecouserNotFoundException {
         tareasServices.eliminarTarea(id);
         return ResponseEntity.ok("Tarea eliminada Exitosamente...!");
     }
