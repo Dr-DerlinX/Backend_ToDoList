@@ -1,6 +1,6 @@
 #url del proyecto:
 
-https://github.com/Dr-DerlinX/Backend_ToDoList
+- https://roadmap.sh/projects/todo-list-api
 
 # Proyecto API de Tareas
 
